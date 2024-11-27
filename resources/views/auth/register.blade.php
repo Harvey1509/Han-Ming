@@ -9,7 +9,8 @@
 @section('content')
 <section class="register">
     <div class="register__container container">
-        <form class="register__form">
+        <form class="register__form" method="post" action="{{ route('handleLogin') }}">
+            @csrf
             <h1 class="register__title">Estamos maravillados de recibirlo en nuestra página..</h1>
             <div class="register__input-box">
                 <x-input required id="name" type="text" name="name" placeholder="Nombre" />

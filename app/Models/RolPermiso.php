@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Database\Eloquent\Model;
 
-class RolPermiso extends Pivot
+class RolPermiso extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles_permisos';
-    public $incrementing = false;
+    protected $table = 'roles_permisos'; // Nombre de la tabla en la base de datos
     protected $fillable = ['id_rol', 'id_permiso'];
 
     public function rol()

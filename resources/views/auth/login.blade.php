@@ -36,7 +36,8 @@
                     <img src="/img/Login-img.png" alt="loginimagen" class="login__image">
                 </div>
 
-                <form class="login__form">
+                <form class="login__form" method="post" action="{{ route('handleLogin') }}">
+                    @csrf
                     <h2 class="login__title">Bienvenido, por favor inicie sesión con sus datos.</h2>
                     <div class="login__input-box">
                         <x-input id="email" type="email" name="email" placeholder="Correo eléctronico" required />

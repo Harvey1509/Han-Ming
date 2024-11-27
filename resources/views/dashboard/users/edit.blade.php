@@ -19,7 +19,15 @@
                 <x-input type="email" label="Correo electrónico" name="email_usuario" value="{{ $usuario->email_usuario }}" />
                 <x-input type="password" label="Contraseña (opcional)" name="password_usuario" placeholder="Ingrese nueva contraseña (dejar en blanco para mantener la actual)" />
                 <x-form.select-field name="id_rol" label="Rol del Usuario" text="Elija un rol" :options="$roles" :currentOption="$usuario->id_rol" />
-                <x-form.checkbox name="estado_usuario" label="Estado Activo" :checked="$usuario->estado_usuario" />
+                @if($usuario->estado_usuario == 'activo')
+                    <x-checkbox type="round" name="estado_usuario" checked>
+                        Estado
+                    </x-checkbox>
+                @else
+                    <x-checkbox type="round" name="estado_usuario">
+                        Estado
+                    </x-checkbox>
+                @endif
             </div>
         </form>
         <div class="form-content__buttons">

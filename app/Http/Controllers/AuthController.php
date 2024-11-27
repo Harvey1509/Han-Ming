@@ -51,13 +51,15 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt(['email_usuario' => $credentials['email'], 'password_usuario' => $credentials['password']])) {
+        if (Auth::attempt(['email_usuario' => $credentials['email'], 'password' => $credentials['password']])) {
             $request->session()->regenerate();
             return redirect()->route('dashboard')->with('success', 'Inicio de sesión exitoso.');
         }
 
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->onlyInput('email');
     }
+
+
 
     public function logout(Request $request)
     {

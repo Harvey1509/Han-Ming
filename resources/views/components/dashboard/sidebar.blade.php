@@ -6,10 +6,10 @@
             ['route' => 'subcategories.index', 'icon' => 'shoppingmode', 'label' => 'Subcategorias'],
             ['route' => 'products.index', 'icon' => 'inventory_2', 'label' => 'Productos'],
             ['route' => 'ad_images.index', 'icon' => 'image', 'label' => 'Imagenes Publicitarias'],
-            ['route' => 'users.index', 'icon' => 'person', 'label' => 'Usuarios'],
             ['route' => 'roles.index', 'icon' => 'manage_accounts', 'label' => 'Roles'],
             ['route' => 'permissions.index', 'icon' => 'shield', 'label' => 'Permisos'],
             ['route' => 'role_permissions.index', 'icon' => 'admin_panel_settings', 'label' => 'Roles y permisos'],
+            ['route' => 'users.index', 'icon' => 'person', 'label' => 'Usuarios'],
         ];
 
         $settings = [
@@ -39,10 +39,12 @@
     @endforeach
 
     <div class="sidebar__separator"></div>
-
-    <a href="#" class="sidebar__button sidebar__button--bottom">
-        <span class="sidebar__indicator"></span>
-        <x-icon icon_name="logout" />
-        Cerrar Sesión
-    </a>
+    <form action="{{route('logout')}}" method="post" class="sidebar__logout">
+        @csrf
+        <button type="submit" class="sidebar__button sidebar__button--bottom">
+            <span class="sidebar__indicator"></span>
+            <x-icon icon_name="logout" />
+            Cerrar Sesión
+        </button>
+    </form>
 </aside>

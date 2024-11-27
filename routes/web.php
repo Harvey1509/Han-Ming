@@ -12,7 +12,6 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RolPermisoController;
-
 // Ruta principal redirige a la tienda pública
 Route::get('/', [EcommerceController::class, 'home'])->name('shop.home');
 
@@ -23,13 +22,17 @@ Route::prefix('shop')->group(function () {
     Route::get('/complaints', [EcommerceController::class, 'complaints'])->name('shop.complaints');
 });
 
-// Rutas de autenticación
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'handleLogin'])->name('handleLogin');
+Route::prefix('auth')->group(function () {
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'handleRegister'])->name('handleRegister');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'handleLogin'])->name('handleLogin');
+});
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rutas del Dashboard protegidas por middleware
 Route::prefix('dashboard')
+    ->middleware(['auth', 'allowed_ips', 'role:Super administrador'])
     ->group(function () {
 
         Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
@@ -109,8 +112,8 @@ Route::prefix('dashboard')
             Route::get('/', [RolPermisoController::class, 'index'])->name('role_permissions.index');
             Route::get('/create', [RolPermisoController::class, 'create'])->name('role_permissions.create');
             Route::post('/create', [RolPermisoController::class, 'store'])->name('role_permissions.store');
-            Route::get('/{id_rol}/{id_permiso}', [RolPermisoController::class, 'edit'])->name('role_permissions.edit');
-            Route::put('/{id_rol}/{id_permiso}', [RolPermisoController::class, 'update'])->name('role_permissions.update');
-            Route::delete('/{id_rol}/{id_permiso}', [RolPermisoController::class, 'destroy'])->name('role_permissions.destroy');
+            Route::get('/{id}', [RolPermisoController::class, 'edit'])->name('role_permissions.edit');
+            Route::put('/{id}', [RolPermisoController::class, 'update'])->name('role_permissions.update');
+            Route::delete('/{id}', [RolPermisoController::class, 'destroy'])->name('role_permissions.destroy');
         });
     });
