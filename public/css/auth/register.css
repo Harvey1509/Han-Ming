@@ -1,0 +1,114 @@
+.register__container {
+    height: 100%;
+    display: flex;
+    padding: 50px 25px;
+    gap: 20px;
+}
+
+.register__form {
+    flex: 1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+.register__input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.register__input {
+    padding: 20px;
+    border-color: black;
+    color: black;
+}
+
+.register__input::placeholder {
+    color: black;
+    font-weight: bold;
+}
+
+.register__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.register__button {
+    padding: 20px 60px;
+    background-color: var(--primary-c600);
+    color: var(--success-c50);
+    border: none;
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    text-align: center;
+}
+
+.register__button:hover {
+    background-color: var(--primary-c700);
+}
+
+.register__login {
+    color: var(--primary-c600);
+    border: none;
+    font-size: var(--button-font-size);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    flex: 1;
+}
+
+.register__login:hover {
+    color: var(--primary-c800);
+}
+
+.register__intro {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register__image {
+    width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .register__container {
+        flex-direction: column-reverse;
+    }
+
+    .register__title {
+        text-align: center;
+    }
+
+    .register__image {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .register__image {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .register__image {
+        width: 90%;
+    }
+
+    .register__container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

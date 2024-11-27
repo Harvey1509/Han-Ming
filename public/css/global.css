@@ -1,0 +1,169 @@
+:root {
+    --h1-font-size: clamp(3.2rem, 5vw, 3.6rem);
+    --h2-font-size: clamp(2.4rem, 5vw, 3.2rem);
+    --h3-font-size: clamp(2rem, 5vw, 2.4rem);
+    --h4-font-size: clamp(1.6rem, 5vw, 2rem);
+    --a-font-size: clamp(1.2rem, 5vw, 1.4rem);
+    --p-font-size: clamp(1.4rem, 5vw, 1.6rem);
+    --button-font-size: clamp(1.4rem, 5vw, 1.6rem);
+    --small-text-font-size: clamp(1rem, 5vw, 1.4rem);
+
+    --font-weight-regular: 400;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --primary-c50: #FFF8EC;
+    --primary-c100: #FFF0D3;
+    --primary-c200: #FFDDA6;
+    --primary-c300: #FFC36D;
+    --primary-c400: #FF9E33;
+    --primary-c500: #FF810B;
+    --primary-c600: #FE6903;
+    --primary-c700: #CB4A03;
+    --primary-c800: #A13B0B;
+    --primary-c900: #81310D;
+
+    --neutral-c50: #F6F6F6;
+    --neutral-c100: #E7E7E7;
+    --neutral-c200: #D1D1D1;
+    --neutral-c300: #B0B0B0;
+    --neutral-c400: #888888;
+    --neutral-c500: #6D6D6D;
+    --neutral-c600: #5D5D5D;
+    --neutral-c700: #4F4F4F;
+    --neutral-c800: #454545;
+    --neutral-c900: #3D3D3D;
+
+    --success-c50: #ECFDF5;
+    --success-c100: #D1FAE5;
+    --success-c200: #A7F3D0;
+    --success-c300: #6EE7B6;
+    --success-c400: #34D398;
+    --success-c500: #10B980;
+    --success-c600: #059668;
+    --success-c700: #047856;
+    --success-c800: #065F45;
+    --success-c900: #064E3B;
+
+    --warning-c50: #FFFAEB;
+    --warning-c100: #FFF1C6;
+    --warning-c200: #FFE188;
+    --warning-c300: #FFCB4A;
+    --warning-c400: #FFBB33;
+    --warning-c500: #F99207;
+    --warning-c600: #DD6B02;
+    --warning-c700: #B74906;
+    --warning-c800: #94380C;
+    --warning-c900: #7A2E0D;
+
+    --danger-c50: #FFF1F1;
+    --danger-c100: #FFDFDF;
+    --danger-c200: #FFC5C5;
+    --danger-c300: #FF9D9D;
+    --danger-c400: #FF6464;
+    --danger-c500: #FF3333;
+    --danger-c600: #ED1515;
+    --danger-c700: #C80D0D;
+    --danger-c800: #A50F0F;
+    --danger-c900: #881414;
+
+    --border-radius-tiny-box: 5px;
+    --border-radius-small-box: 10px;
+    --border-radius-medium-box: 15px;
+    --border-radius-large-box: 20px;
+
+    --padding-container: 30px;
+    --container-width: 1360px;
+}
+
+@media screen and (max-width: 1024px) {
+    :root {
+        --padding-container: 32px;
+        --container-width: 960px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --container-width: 704px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    :root {
+        --padding-container: 16px;
+        --container-width: 448px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    :root {
+        --container-width: 288px;
+    }
+}
+
+.container {
+    max-width: var(--container-width);
+    width: 100%;
+    margin: 0 auto;
+    padding-left: var(--padding-container);
+    padding-right: var(--padding-container);
+
+    position: relative;
+}
+
+.logotipo {
+    width: 200px;
+    height: 56px;
+}
+
+h1 {
+    font-size: var(--h1-font-size);
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+}
+
+h3 {
+    font-size: var(--h3-font-size);
+}
+
+h4 {
+    font-size: var(--h4-font-size);
+}
+
+button {
+    border: none;
+    font-size: var(--button-font-size);
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: var(--neutral-c200);
+    color: var(--neutral-c500);
+    cursor: not-allowed;
+}
+
+small {
+    font-size: var(--small-text-font-size);
+}
+
+p {
+    font-size: var(--p-font-size);
+}
+
+a {
+    font-size: var(--a-font-size);
+}
+
+label {
+    font-size: var(--p-font-size);
+}
+
+input, textarea {
+    font-size: var(--p-font-size);
+}

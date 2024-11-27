@@ -1,0 +1,53 @@
+body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+.logotipo{
+    width: auto;
+    height: 56px;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.header__user{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+    }
+}
+
+.header__desc{
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 225px 1fr;
+}
+
+
+.main-content{
+    background-color: var(--primary-c600);
+    padding: 20px;
+}
+
+.main-content__wrapper{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

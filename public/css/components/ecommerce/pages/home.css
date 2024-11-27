@@ -1,0 +1,191 @@
+/* SECCION DE CATEGORIAS DESTACADAS */
+.cat-dest {
+    overflow: hidden;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.cat-dest__cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.cat-dest__cabezera h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.cat-dest__cabezera p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.cat-dest__categorias {
+    display: flex;
+    gap: 10px;
+}
+
+.cat-dest__categoria {
+    background-color: #818181;
+    border-radius: 15px;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+/* SECCION DE OFERTAS */
+
+.ofertas {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.ofertas__imagenes {
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ofertas__imagen {
+    flex: 1;
+    min-width: min(200px, 100%);
+    height: 300px;
+    background-color: #818181;
+}
+
+.ofertas__imagen:last-child,
+.ofertas__imagen:nth-last-child(2) {
+    min-width: min(500px, 100%);
+}
+
+.ofertas__botones {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* SECCION DE PUBLICIDAD */
+.publicidad {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.publicidad__imagen {
+    width: 100%;
+    height: 300px;
+    background-color: #818181;
+}
+
+
+/* SECCION DESTACADA O PRINCIPAL */
+.seccion-destacada {
+    overflow: hidden;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.see-more {
+    color: var(--primary-c600);
+    font-size: var(--button-font-size);
+    font-weight: var(--font-weight-semibold);
+    padding: 10px;
+    border-bottom: 1px solid var(--primary-c600);
+    display: inline-block;
+}
+
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.imagenes {
+    display: flex;
+    gap: 10px;
+}
+
+.imagen {
+    border-radius: 15px;
+    width: 250px;
+    height: 300px;
+    background-color: #818181;
+    flex-shrink: 0;
+}
+
+.promocion{
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
+.promocion__imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.promocion__imagen {
+    flex: 1;
+    min-width: min(400px, 100%);
+    height: 300px;
+    background-color: #818181;
+}
+
+
+/* SECCION DE SOCIOS  */
+.socios-marcas {
+    overflow: hidden;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.socios-marcas__cabecera {
+    flex: 1 0 max-content;
+}
+
+.socios-marcas__imagenes {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.socios-marcas__imagen {
+    width: 200px;
+    height: 120px;
+    background-color: #818181;
+    flex-shrink: 0;
+}
+
+/* SECCION DE SUSCRIPCION */
+.suscribete__wrapper {
+    width: 100%;
+    background-color: #424141;
+    color: white;
+}
+
+.suscribete {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.suscribete__formulario {
+    margin-top: 20px;
+}
+
+.suscribete__input-box {
+    display: flex;
+    margin-bottom: 5px;
+    gap: 10px;
+}
