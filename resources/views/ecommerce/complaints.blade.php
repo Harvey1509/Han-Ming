@@ -7,7 +7,8 @@
 @endpush
 
 @section('content')
-<form class="form container" id="reclamacionesForm">
+<form class="form container" id="reclamacionesForm" method="POST" action="{{ route('sendClaim') }}">
+    @csrf
     <h1>Libro de Reclamaciones</h1>
 
     <section class="form__section">
@@ -52,10 +53,10 @@
     </section>
 
     <section class="form__section">
-        <x-checkbox type="square" required id="terminos" name="terminos" >
+        <x-checkbox type="square" id="terminos" name="terminos" >
             He leído los <a href="#"><strong>términos y condiciones.</strong></a>
         </x-checkbox>
-        <x-checkbox type="square" required id="privacidad" name="privacidad" >
+        <x-checkbox type="square" id="privacidad" name="privacidad" >
             Declaro haber leído las <a href="#"><strong>políticas de privacidad</strong></a> y autorizo el tratamiento de mis datos conforme a ella.
         </x-checkbox>
         <x-checkbox type="square" id="promocionales" name="promocionales" >
@@ -64,7 +65,7 @@
     </section>
 
     <div class="form__button-wrapper">
-        <button class="form__button primary-button" type="submit" id="sendButton" disabled>Enviar</button>
+        <button class="form__button primary-button" type="submit" id="sendButton">Enviar</button>
     </div>
 </form>
 @endsection

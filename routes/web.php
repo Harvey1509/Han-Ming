@@ -12,6 +12,8 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RolPermisoController;
+use App\Http\Controllers\CarritoController;
+
 // Ruta principal redirige a la tienda pública
 Route::get('/', [EcommerceController::class, 'home'])->name('shop.home');
 
@@ -20,6 +22,13 @@ Route::prefix('shop')->group(function () {
     Route::get('/register', [AuthController::class, 'register'])->name('shop.register');
     Route::get('/products', [EcommerceController::class, 'products'])->name('shop.products');
     Route::get('/complaints', [EcommerceController::class, 'complaints'])->name('shop.complaints');
+    Route::middleware('auth')->group(function () {
+        Route::post('/complaints', [EcommerceController::class, 'sendClaim'])->name('sendClaim');
+        Route::post('/carrito', [CarritoController::class, 'index'])->name('shop.carrito');
+        Route::post('/carrito/agregar', [CarritoController::class, 'agregarProducto'])->name('shop.agregarProducto');
+        Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminarProducto'])->name('shop.eliminarProducto');
+        Route::post('/carrito/finalizar', [CarritoController::class, 'finalizarCarrito'])->name('shop.finalizarCarrito');
+    });
 });
 
 Route::prefix('auth')->group(function () {
@@ -28,6 +37,8 @@ Route::prefix('auth')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'handleLogin'])->name('handleLogin');
 });
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rutas del Dashboard protegidas por middleware

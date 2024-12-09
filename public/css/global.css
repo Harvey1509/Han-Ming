@@ -167,3 +167,38 @@ label {
 input, textarea {
     font-size: var(--p-font-size);
 }
+
+.primary-button{
+    min-width: 120px;
+    height: 45px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: var(--primary-c600);   
+    color: var(--neutral-c50);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--button-font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.secondary-button{
+    min-width: 120px;
+    height: 45px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;   
+    border: 1px solid var(--neutral-c900);
+    color: var(--neutral-c900);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--button-font-size);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

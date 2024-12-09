@@ -15,4 +15,16 @@ class Producto extends Model
     {
         return $this->belongsTo(Subcategoria::class, 'id_subcategoria');
     }
+
+    // Relación inversa para los carritos
+    public function carrito_productos()
+    {
+        return $this->hasMany(CarritoProducto::class, 'id_producto');
+    }
+
+    // Relación a través de CarritoProducto para acceder a la orden
+    public function ordenes()
+    {
+        return $this->hasManyThrough(Orden::class, CarritoProducto::class, 'id_producto', 'id_carrito');
+    }
 }

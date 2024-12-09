@@ -8,18 +8,7 @@
 @endpush
 
 @section('content')
-<section class="slider" style="height: 500px;">
-    <div class="slider__images">
-        <img src="/img/slider-1.jpg" class="slider__image" />
-        <img src="/img/slider-2.jpg" class="slider__image" />
-        <img src="/img/slider-3.jpg" class="slider__image" />
-    </div>
-    <div class="slider__navigation-buttons">
-        <button class="slider__nav-button slider__nav-button--active"></button>
-        <button class="slider__nav-button"></button>
-        <button class="slider__nav-button"></button>
-    </div>
-</section>
+@include('components.ecommerce.slider')
 <section class="cat-dest container">
     <div class="cat-dest__cabecera">
         <div>

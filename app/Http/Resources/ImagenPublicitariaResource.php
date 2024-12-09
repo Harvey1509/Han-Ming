@@ -15,6 +15,8 @@ class ImagenPublicitariaResource extends JsonResource
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
             'estado' => $this->estado,
+            'tipo' => $this->tipo,
+            'orden' => $this->orden,
         ];
     }
 }

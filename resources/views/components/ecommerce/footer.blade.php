@@ -29,43 +29,16 @@
 
             <div class="footer__wrapper">
                 <div class="footer__links">
-                    <h4 class="footer__title">Enlaces Útiles</h4>
+                    <h4 class="footer__title">Enlaces rapidos</h4>
                     <ul class="footer__list">
                         <li>
-                            <a href="home.html">Inicio</a>
+                            <a href="{{route('shop.home')}}">Inicio</a>
                         </li>
                         <li>
-                            <a href="#">Ofertas</a>
+                            <a href="{{route('shop.products')}}">Productos</a>
                         </li>
                         <li>
-                            <a href="#">Más Vendidos</a>
-                        </li>
-                        <li>
-                            <a href="complaints.html" target="_blank">Libro de reclamaciones</a>
-                        </li>
-                        <li>
-                            <a href="#">Garantías</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="footer__links">
-                    <h4 class="footer__title">Soporte al Cliente</h4>
-                    <ul class="footer__list">
-                        <li>
-                            <a href="#">Preguntas frecuentes</a>
-                        </li>
-                        <li>
-                            <a href="#">Envíos</a>
-                        </li>
-                        <li>
-                            <a href="#">Devoluciones</a>
-                        </li>
-                        <li>
-                            <a href="#">Política de reembolsos</a>
-                        </li>
-                        <li>
-                            <a href="#">Ayuda en línea</a>
+                            <a href="{{route('shop.complaints')}}l">Libro de reclamaciones</a>
                         </li>
                     </ul>
                 </div>
@@ -74,13 +47,13 @@
                     <h4 class="footer__title">Contáctanos</h4>
                     <ul class="footer__list">
                         <li>
-                            Jr. Huancavelica 650.
+                            Dirección: <br> Jr. Huancavelica 650.
                         </li>
                         <li>
-                            +51 978 668 854
+                            Teléfono: <br> +51 978 668 854
                         </li>
                         <li>
-                            importacioneshanming@gmail.com
+                            Correo: <br> importacioneshanming@gmail.com
                         </li>
                     </ul>
                 </div>
