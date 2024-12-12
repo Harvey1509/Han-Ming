@@ -1,4 +1,9 @@
-<section class="slider" style="height: 450px;" id="slider">
+@props([
+    'height' => '300px',
+    'imagenes_slider' => [],
+])
+
+<section class="slider" style="height: {{ $height }}" id="slider">
     <div class="slider__images">
         @foreach ($imagenes_slider as $index => $imagen)
             <img src="{{ $imagen->url_imagen }}" class="slider__image" data-slide="{{ $index + 1 }}" />

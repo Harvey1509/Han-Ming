@@ -9,6 +9,8 @@ class Orden extends Model
 {
     use HasFactory;
 
+    protected $table = "ordenes";
+
     protected $fillable = ['id_usuario', 'id_carrito', 'total', 'estado'];
 
     public function carrito()

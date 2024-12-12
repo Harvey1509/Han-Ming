@@ -9,7 +9,7 @@
 
 @section('content')
 
-@include('components.ecommerce.slider', ['imagenes_slider' => $imagenes_slider])
+@include('components.ecommerce.slider', ['height' => '250px'])
 
 <div class="productos">
     @include('components.ecommerce.filters', ['categorias' => $categorias])

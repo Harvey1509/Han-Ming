@@ -1,63 +1,3 @@
-.categorias-mas-vistas {
-    overflow: hidden;
-    display: flex;
-    gap: 10px;
-
-    padding-top: 25px;
-    padding-bottom: 25px;
-}
-
-.categorias-mas-vistas__imagen {
-    width: 280px;
-    height: 100px;
-    border-radius: 20px;
-    background-color: #818181;
-    flex-shrink: 0;
-}
-
-.mini-banner__imagen {
-    width: 100%;
-    height: 100px;
-    border-radius: 20px;
-    background-color: #818181;
-}
-
-.promociones {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    height: 500px;
-    overflow: hidden;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 20px;
-}
-
-.promociones__imagen {
-    width: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    background-color: #818181;
-}
-
-.promociones__imagen:nth-child(1) {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-}
-
-@media screen and (max-width: 768px) {
-    .promociones {
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-    }
-
-    .promociones__imagen:nth-child(1) {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-    }
-}
-
 .productos {
     display: flex;
     gap: 20px;
@@ -155,9 +95,11 @@
     opacity: 1;
     transition: opacity 0.6s ease;
 }
-.subcategory-button.active{
+
+.subcategory-button.active {
     border-color: var(--primary-c700);
 }
+
 .subcategory-button.active::before {
     opacity: 1;
 }
@@ -200,7 +142,7 @@
     transition: all 0.3s ease;
 }
 
-.price-filter-input{
+.price-filter-input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -224,10 +166,11 @@
     border-color: var(--primary-c700);
 }
 
-.price-filter-buttons-wrapper{
+.price-filter-buttons-wrapper {
     display: flex;
 }
-.price-filter-button-sign{
+
+.price-filter-button-sign {
     flex: 1;
     width: 100%;
 }
@@ -238,15 +181,18 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
+
 .active-filters h4 {
     margin-bottom: 0.5rem;
     font-weight: bold;
 }
+
 #active-filters-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
+
 #active-filters-list li {
     display: inline-block;
     background: var(--primary-c500);
@@ -340,7 +286,7 @@
     color: white;
 }
 
-.pagination{
+.pagination {
     margin-top: auto;
 }
 

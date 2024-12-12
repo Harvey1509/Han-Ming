@@ -8,31 +8,7 @@
 @endpush
 
 @section('content')
-@include('components.ecommerce.slider')
-<section class="cat-dest container">
-    <div class="cat-dest__cabecera">
-        <div>
-            <small>Categorias destacadas</small>
-            <h2>Explora nuestras categorias</h2>
-            <p>Encuentra lo que necesitas en un solo lugar</p>
-        </div>
-        <a href="#" class="primary-button">Explorar</a>
-    </div>
-    <div class="cat-dest__categorias">
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-        <div class="cat-dest__categoria"></div>
-    </div>
-</section>
+@include('components.ecommerce.slider', ['height' => '450px'])
 <section class="ofertas container">
     <div class="ofertas__cabecera">
         <small>Ofertas</small>
@@ -56,7 +32,7 @@
     <div class="publicidad__imagen"></div>
 </section>
 <section class="promocion container">
-    <div class="cabecera">
+    <div class="promocion__cabecera">
         <h2>Promociones</h2>
     </div>
     <div class="promocion__imagenes">
@@ -64,25 +40,6 @@
         <div class="promocion__imagen"></div>
     </div>
 </section>
-<div class="suscribete__wrapper">
-    <section class="suscribete container">
-        <div class="suscribete__cabecera">
-            <small>Suscribete</small>
-            <h2>Descubre nuestros productos exclusivos</h2>
-            <p>Explora nuestra amplia selección de productos de importación</p>
-        </div>
-        <form class="suscribete__formulario">
-            <div class="suscribete__input-box">
-                <x-input
-                label="Correo Electrónico"
-                placeholder="Ingrese su correo electrónico" />
-                <button type="submit" class="primary-button">Suscribirme</button>
-            </div>
-            <small>Al hacer clic en Suscribirme, confirmas que estás de acuerdo con
-                nuestros Términos y Condiciones.</small>
-        </form>
-    </section>
-</div>
 <section class="socios-marcas container">
     <div class="socios-marcas__cabecera">
         <small>Socios comerciales</small>
