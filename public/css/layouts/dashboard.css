@@ -3,6 +3,11 @@ body {
     display: grid;
     grid-template-rows: auto 1fr;
 }
+
+.scroll-hidden{
+    overflow: hidden;
+}
+
 .logotipo{
     width: auto;
     height: 56px;
@@ -20,12 +25,6 @@ body {
     display: flex;
     align-items: center;
     gap: 20px;
-
-    img{
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-    }
 }
 
 .header__desc{
@@ -38,7 +37,6 @@ body {
     grid-template-columns: 225px 1fr;
 }
 
-
 .main-content{
     background-color: var(--primary-c600);
     padding: 20px;
@@ -50,4 +48,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.img-pw {
+    cursor: pointer;
 }

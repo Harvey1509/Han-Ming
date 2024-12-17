@@ -88,13 +88,13 @@
                 <div>
                     <h4>{{ $producto->producto->nombre_producto }}</h4>
                     <p><strong>Cantidad:</strong> {{ $producto->cantidad }}</p>
-                    <p><strong>Subtotal:</strong> ${{ $producto->cantidad * $producto->producto->precio_producto }}</p>
+                    <p><strong>Subtotal:</strong> S/{{ $producto->cantidad * $producto->producto->precio_producto }}</p>
                 </div>
             </div>
             @endforeach
         </div>
 
-        <h3 class="total">Monto total: ${{ $order->total }}</h3>
+        <h3 class="total">Monto total: S/{{ $order->total }}</h3>
     </div>
 </body>
 

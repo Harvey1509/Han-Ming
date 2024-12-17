@@ -13,9 +13,9 @@
 
         <form action="{{ route('subcategories.store') }}" class="form-content" method="POST" id="createForm">
             @csrf
-            <x-form.select-field name="id_categoria" label="Categoría perteneciente" text="Elija una categoría"
+            <x-select name="id_categoria" label="Categoría perteneciente" text="Elija una categoría"
                 :options="$categorias" :currentOption="null" />
-            <x-form.input-field type="text" label="Nombre" name="nombre_subcategoria"
+            <x-input type="text" label="Nombre" name="nombre_subcategoria"
                 placeholder="Ingrese el nombre de la subcategoría" required="required" />
         </form>
         <div class="form-content__buttons">

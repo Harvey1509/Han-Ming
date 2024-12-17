@@ -14,7 +14,6 @@ class CheckUserRole
 
         if (!$user || !in_array($user->role->nombre_rol, $roles)) {
             return redirect()->route('shop.home')->with('error', 'No tienes permiso para acceder a esta área.');
-            // return response()->json(['error' => 'No tienes permiso para acceder a esta área.'], 403);
         }
 
 

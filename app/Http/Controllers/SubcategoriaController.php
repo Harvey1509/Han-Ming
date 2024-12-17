@@ -11,11 +11,21 @@ class SubcategoriaController extends Controller
 
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $subcategorias = Subcategoria::all();
-        return view('dashboard.subcategories.index', compact('subcategorias'));
+        $search = $request->query('search', ''); 
+        $rowsPerPage = $request->query('rows', 10);
+
+        $subcategorias = Subcategoria::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('nombre_subcategoria', 'LIKE', "%$search%");
+            })
+            ->paginate($rowsPerPage);
+
+        return view('dashboard.subcategories.index', compact('subcategorias', 'search', 'rowsPerPage'));
     }
+
+
 
     public function create()
     {

@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Mail;
 
 class CarritoController extends Controller
 {
-    // Mostrar el carrito actual del usuario
     public function index()
     {
         $carrito = Carrito::with('productos.producto')
@@ -30,8 +29,9 @@ class CarritoController extends Controller
 
         return response()->json($carrito->productos->map(function ($item) {
             return [
-                'id_carrito' => $item->id_carrito,
                 'id' => $item->id,
+                'id_carrito' => $item->id_carrito,
+                'id_producto' => $item->id_producto,
                 'imagen' => url('storage/' . $item->producto->imagen_url_producto),
                 'nombre' => $item->producto->nombre_producto,
                 'precio' => $item->precio_unitario,
@@ -41,7 +41,6 @@ class CarritoController extends Controller
         }));
     }
 
-    // Agregar un producto al carrito
     public function agregarProducto(Request $request)
     {
         $carrito = Carrito::where('id_usuario', Auth::user()->id)
@@ -64,26 +63,35 @@ class CarritoController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function actualizarCantidad(Request $request)
+    {
+        $carritoProducto = CarritoProducto::find($request->id);
 
-    // Eliminar un producto del carrito
+        if ($carritoProducto) {
+            $carritoProducto->update(['cantidad' => $request->cantidad]);
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['error' => 'Producto no encontrado en el carrito'], 404);
+        }
+    }
+
     public function eliminarProducto(Request $request)
     {
-
         $carritoProducto = CarritoProducto::where('id_carrito', $request->id_carrito)
             ->where('id_producto', $request->id_producto)
             ->first();
 
-        $carritoProducto->delete();
-
-        return response()->json(['success' => true]);
+        if ($carritoProducto) {
+            $carritoProducto->delete();
+            return response()->json(['success' => true]);
+        } else {
+            return response()->json(['error' => 'Producto no encontrado en el carrito'], 404);
+        }
     }
 
-    // Finalizar el carrito
     public function finalizarCarrito(Request $request)
     {
-        $carrito = Carrito::where('id_usuario', Auth::user()->id)
-            ->where('estado', 'activo')
-            ->first();
+        $carrito = Carrito::where('id_usuario', Auth::user()->id)->where('estado', 'activo')->first();
 
         if (!$carrito) {
             return response()->json(['error' => 'No se encontró un carrito abierto para finalizar.'], 404);
@@ -107,7 +115,7 @@ class CarritoController extends Controller
         ]);
 
         $order = Orden::with(['usuario', 'carrito.productos.producto'])->findOrFail($order->id);
-        Mail::to('ovjeanbeckan@gmail.com')->send(new OrderReceivedMail($order));
+        Mail::to('ovjeanb@gmail.com')->send(new OrderReceivedMail($order));
 
         return response()->json(['message' => 'Orden enviada exitosamente.']);
     }

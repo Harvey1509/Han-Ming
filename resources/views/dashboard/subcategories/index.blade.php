@@ -4,15 +4,10 @@
 
 @section('main-content')
 <div class="main-content__panel">
-    <x-main-content.panel-header title="Subcategorias" :filters="[
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro']
-    ]" rowsPerPage="10" prefix="subcategories"/>
+    <x-main-content.panel-header title="Subcategorias" rowsPerPageButton :rowsPerPage="$rowsPerPage" prefix="subcategories"/>
 
     <x-main-content.table :headers="['Id', 'Id Categoria', 'Nombre', 'Acciones']">
-        @foreach ($subcategorias as $subcategoria)
+        @forelse ($subcategorias as $subcategoria)
             <tr>
                 <td>{{ $subcategoria->id }}</td>
                 <td>{{ $subcategoria->id_categoria }}</td>
@@ -29,7 +24,11 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+        <tr>
+            <td colspan="3">No se encontraron resultados para "{{ $search }}".</td>
+        </tr>
+        @endforelse
     </x-main-content.table>
 
     <div class="main-content__tfoot">

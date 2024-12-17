@@ -1,3 +1,7 @@
+.img-pw {
+    cursor: pointer;
+}
+
 .productos {
     display: flex;
     gap: 20px;

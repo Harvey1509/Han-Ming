@@ -19,14 +19,14 @@
             @method('PUT')
             @csrf
             <div class="form-column form-products-column inputs">
-                <x-input type="text" label="Id" value="{{ $producto->id }}" disabled />
-                <x-form.select-field name="subcategoria_producto" label="Subcategoría perteneciente" text="Elija una subcategoría" :options="$subcategorias" :currentOption="$subcategoria_asociada->id" />
+                <x-input type="text" label="Codigo del producto" name="id" value="{{ $producto->id }}" />
+                <x-select name="subcategoria_producto" label="Subcategoría perteneciente" text="Elija una subcategoría" :options="$subcategorias" :currentOption="$subcategoria_asociada->id" />
                 <x-input type="text" label="Nombre nuevo" name="nombre_producto" value="{{ $producto->nombre_producto }}" />
                 <x-input type="text" label="Precio" name="precio_producto" value="{{ $producto->precio_producto }}" />
                 <x-textarea label="Descripcion" name="descripcion_producto" value="{{ $producto->descripcion_producto }}" />
             </div>
             <div class="form-column form-products-column image">
-                <x-form.file-upload name="imagen_producto" label="Cambiar Imagen" :src="$producto->imagen_url_producto" />
+                <x-file-upload name="imagen_producto" label="Cambiar Imagen" :src="$producto->imagen_url_producto" />
             </div>
         </form>
         <div class="form-content__buttons">

@@ -4,9 +4,7 @@
 
 @section('main-content')
 <div class="main-content__panel">
-    <x-main-content.panel-header title="Roles" :filters="[
-        ['label' => 'Buscar por Nombre']
-    ]" rowsPerPage="10" prefix="roles"/>
+    <x-main-content.panel-header title="Roles" rowsPerPageButton :rowsPerPage="$rowsPerPage" prefix="roles"/>
 
     <x-main-content.table :headers="['Id', 'Nombre del Rol', 'Acciones']">
         @foreach ($roles as $rol)

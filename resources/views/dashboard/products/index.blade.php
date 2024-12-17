@@ -5,19 +5,13 @@
 
 @section('main-content')
 <div class="main-content__panel">
-    <x-main-content.panel-header title="Productos" :filters="[
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro'],
-        ['label' => 'Filtro']
-    ]" rowsPerPage="10" prefix="products"/>
+    <x-main-content.panel-header title="Productos" rowsPerPageButton :rowsPerPage="$rowsPerPage" prefix="products"/>
 
-    <x-main-content.table :headers="['Imagen', 'Id', 'Id Subactegoria', 'Nombre', 'Descripcion', 'Precio', 'Acciones']">
+    <x-main-content.table :headers="['Imagen', 'Codigo Producto', 'Id Subactegoria', 'Nombre', 'Descripcion', 'Precio', 'Acciones']">
         @foreach ($productos as $producto)
             <tr>
                 <td class="image">
-                    <img
-                        src="{{ asset($producto->imagen_url_producto ? "storage/{$producto->imagen_url_producto}" : 'storage/imagen-por-defecto.png') }}">
+                    <img class="img-pw" src="{{ asset($producto->imagen_url_producto ? "storage/{$producto->imagen_url_producto}" : 'storage/imagen-por-defecto.png') }}">
                 </td>
                 <td>{{ $producto->id }}</td>
                 <td>{{ $producto->id_subcategoria }}</td>

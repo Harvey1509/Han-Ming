@@ -16,28 +16,27 @@
         <p>No te pierdas nuestros precios especiales</p>
     </div>
     <div class="ofertas__imagenes">
-        <div class="ofertas__imagen"></div>
-        <div class="ofertas__imagen"></div>
-        <div class="ofertas__imagen"></div>
-        <div class="ofertas__imagen"></div>
-        <div class="ofertas__imagen"></div>
-        <div class="ofertas__imagen"></div>
+    @foreach ($ofertas_temporada as $oferta)
+        <div class="ofertas__imagen">
+            <img class="ofertas__img" src="{{ $oferta['url_imagen'] }}">
+        </div>
+    @endforeach
     </div>
     <div class="ofertas__botones">
         <a href="#" class="primary-button">Saber más</a>
         <a href="#" class="secondary-button">Ver productos</a>
     </div>
 </section>
-<section class="publicidad container">
-    <div class="publicidad__imagen"></div>
-</section>
 <section class="promocion container">
     <div class="promocion__cabecera">
         <h2>Promociones</h2>
     </div>
     <div class="promocion__imagenes">
-        <div class="promocion__imagen"></div>
-        <div class="promocion__imagen"></div>
+        @for ($i = 0; $i < 2; $i++)
+            <div class="promocion__imagen">
+                <img class="promocion__img" src="{{ $promociones[0]['url_imagen'] }}">
+            </div>
+        @endfor
     </div>
 </section>
 <section class="socios-marcas container">

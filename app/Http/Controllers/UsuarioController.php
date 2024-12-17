@@ -10,11 +10,19 @@ class UsuarioController extends Controller
 {
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = Usuario::all();
-        return view('dashboard.users.index', compact('usuarios'));
+        $search = $request->query('search', ''); 
+        $rowsPerPage = $request->query('rows', 10);
+
+        $usuarios = Usuario::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('nombre_usuario', 'LIKE', "%$search%");})
+            ->paginate($rowsPerPage);
+
+        return view('dashboard.users.index', compact('usuarios', 'search', 'rowsPerPage'));
     }
+
 
     public function create()
     {

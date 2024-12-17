@@ -9,11 +9,20 @@ class RolController extends Controller
 {
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Rol::all();
-        return view('dashboard.roles.index', compact('roles'));
+        $search = $request->query('search', '');
+        $rowsPerPage = $request->query('rows', 10);
+
+        $roles = Rol::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('nombre_rol', 'LIKE', "%$search%");
+            })
+            ->paginate($rowsPerPage);
+
+        return view('dashboard.roles.index', compact('roles', 'search', 'rowsPerPage'));
     }
+
 
     public function create()
     {

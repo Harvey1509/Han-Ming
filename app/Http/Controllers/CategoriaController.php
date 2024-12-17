@@ -10,11 +10,16 @@ class CategoriaController extends Controller
 
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $categorias = Categoria::all();
-        return view('dashboard.categories.index', compact('categorias'));
+        $search = $request->query('search', ''); 
+        $rowsPerPage = $request->query('rows', 10);
+
+        $categorias = Categoria::query()->when($search, function ($query) use ($search) {$query->where('nombre_categoria', 'LIKE', "%$search%");})->paginate($rowsPerPage);
+
+        return view('dashboard.categories.index', compact('categorias', 'search', 'rowsPerPage'));
     }
+
     
     public function create()
     {

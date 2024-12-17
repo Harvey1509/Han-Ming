@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('productos', function (Blueprint $table) {
-            $table->id();
+            $table->string('id', 6)->primary();
             $table->foreignId('id_subcategoria')->constrained('subcategorias');
             $table->string('nombre_producto')->nullable();
             $table->text('descripcion_producto')->nullable();
@@ -22,5 +22,4 @@ return new class extends Migration {
     {
         Schema::dropIfExists('productos');
     }
-
 };

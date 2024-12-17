@@ -9,12 +9,9 @@ class CheckAllowedIPs
 {
 
     protected $allowedIPs = [
-        '127.0.0.1', // Para desarrollar en localhost
+        '127.0.0.1',
     ];
 
-    /**
-     * Manejar una solicitud entrante.
-     */
     public function handle(Request $request, Closure $next)
     {
         if (!in_array($request->ip(), $this->allowedIPs)) {

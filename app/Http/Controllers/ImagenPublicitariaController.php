@@ -11,11 +11,20 @@ class ImagenPublicitariaController extends Controller
 
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $imagenes = ImagenPublicitaria::all();
-        return view('dashboard.ad_images.index', compact('imagenes'));
+        $search = $request->query('search', '');
+        $rowsPerPage = $request->query('rows', 10);
+
+        $imagenes = ImagenPublicitaria::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('tipo', 'LIKE', "%$search%");
+            })
+            ->paginate($rowsPerPage);
+
+        return view('dashboard.ad_images.index', compact('imagenes', 'search', 'rowsPerPage'));
     }
+
 
     public function create()
     {
@@ -38,15 +47,14 @@ class ImagenPublicitariaController extends Controller
             'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
             'estado' => 'required|string|max:20',
             'tipo' => 'required|string|max:50',
-            'orden' => 'nullable|integer|min:0', 
+            'orden' => 'nullable|integer|min:0',
         ]);
 
-        // Crear una nueva instancia del modelo
         $imagen = new ImagenPublicitaria();
         $imagen->fecha_inicio = $validatedData['fecha_inicio'];
         $imagen->fecha_fin = $validatedData['fecha_fin'];
         $imagen->estado = $validatedData['estado'];
-        $imagen->tipo = $validatedData['tipo']; 
+        $imagen->tipo = $validatedData['tipo'];
         $imagen->orden = $validatedData['orden'] ?? 0;
         $imagen->url_imagen = '';
         $imagen->save();
@@ -71,7 +79,7 @@ class ImagenPublicitariaController extends Controller
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'nullable|date|after_or_equal:fecha_inicio',
             'estado' => 'required|string|max:20',
-            'tipo' => 'required|string|max:50', 
+            'tipo' => 'required|string|max:50',
             'orden' => 'nullable|integer|min:0',
         ]);
 
@@ -79,7 +87,7 @@ class ImagenPublicitariaController extends Controller
         $imagen->fecha_inicio = $validatedData['fecha_inicio'];
         $imagen->fecha_fin = $validatedData['fecha_fin'];
         $imagen->estado = $validatedData['estado'];
-        $imagen->tipo = $validatedData['tipo']; 
+        $imagen->tipo = $validatedData['tipo'];
         $imagen->orden = $validatedData['orden'] ?? 0;
 
         if ($request->hasFile('url_imagen')) {
@@ -106,7 +114,7 @@ class ImagenPublicitariaController extends Controller
         $imagen = ImagenPublicitaria::findOrFail($id);
 
         if ($imagen->url_imagen) {
-            Storage::disk('public')->delete($imagen->url_imagen); // Eliminar la imagen del almacenamiento
+            Storage::disk('public')->delete($imagen->url_imagen);
         }
 
         $imagen->delete();

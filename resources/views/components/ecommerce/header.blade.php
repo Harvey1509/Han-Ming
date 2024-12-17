@@ -4,7 +4,7 @@
             <button class="header__m-icon">
                 <span class="material-symbols-outlined"> menu </span>
             </button>
-            <a href="home.html" class="header__logo">
+            <a href="{{route('shop.home')}}" class="header__logo">
                 <img alt="Logotipo" class="logotipo logotipo--header" />
             </a>
             <button class="header__m-icon inactive">
@@ -15,16 +15,10 @@
                     @auth
                     <li>
                         <h4>{{ Auth::user()->nombre_usuario }}</h4>
-                        <div class="header__buttons-wrapper">
-                            <button>
-                                <span class="material-symbols-outlined"> person </span>
-                                <small>Cuenta</small>
-                            </button>
-                            <button>
-                                <span class="material-symbols-outlined"> translate </span>
-                                <small>Idioma</small>
-                            </button>
-                        </div>
+                        <form action="{{route('logout')}}" method="post">
+                            @csrf
+                            <button type="submit">Cerrar sesión</button>
+                        </form>
                     </li>
                     <li class="header__separator"></li>
                     <li>

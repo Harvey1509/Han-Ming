@@ -15,13 +15,14 @@
             enctype="multipart/form-data">
             @csrf
             <div class="form-column form-products-column inputs">
+                <x-input type="text" label="Codigo del producto" name="id" placeholder="Ingrese el codigo del producto" required />
                 <x-input type="text" label="Nombre" name="nombre_producto" placeholder="Ingrese el nombre del producto" required />
-                <x-form.select-field name="subcategoria_producto" label="Subcategoría perteneciente" text="Elija una subcategoría" :options="$subcategorias" :currentOption="null" />
+                <x-select name="subcategoria_producto" label="Subcategoría perteneciente" text="Elija una subcategoría" :options="$subcategorias" :currentOption="null" />
                 <x-input type="text" label="Precio" name="precio_producto" placeholder="Ingrese el precio del producto" required />
                 <x-textarea label="Descripción" name="descripcion_producto" placeholder="Ingrese la descripción del producto" required />
             </div>
             <div class="form-column form-products-column image">
-                <x-form.file-upload name="imagen_producto" label="Subir Imagen" />
+                <x-file-upload name="imagen_producto" label="Subir Imagen" />
             </div>
         </form>
         <div class="form-content__buttons">

@@ -10,12 +10,16 @@ return new class extends Migration {
         Schema::create('carrito_productos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_carrito')->constrained('carritos')->onDelete('cascade');
-            $table->foreignId('id_producto')->constrained('productos')->onDelete('cascade');
+            $table->string('id_producto', 6); 
             $table->integer('cantidad')->default(1);
-            $table->decimal('precio_unitario', 10, 2); // Precio al momento de agregar al carrito
+            $table->decimal('precio_unitario', 10, 2);
             $table->timestamps();
+
+            // Agregar la clave foránea manualmente
+            $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');
         });
     }
+
 
     public function down()
     {

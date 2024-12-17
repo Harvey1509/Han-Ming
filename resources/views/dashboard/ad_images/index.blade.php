@@ -4,18 +4,13 @@
 
 @section('main-content')
 <div class="main-content__panel">
-    <x-main-content.panel-header title="Imágenes Publicitarias" :filters="[
-        ['label' => 'Filtro 1'],
-        ['label' => 'Filtro 2'],
-        ['label' => 'Filtro 3'],
-        ['label' => 'Filtro 4']
-    ]" rowsPerPage="10" prefix="ad_images" />
+    <x-main-content.panel-header title="Imágenes Publicitarias" rowsPerPageButton :rowsPerPage="$rowsPerPage" prefix="ad_images" />
 
     <x-main-content.table :headers="['Imagen', 'ID', 'Fecha Inicio', 'Fecha Fin', 'Estado', 'Tipo', 'Orden', 'Acciones']">
         @foreach ($imagenes as $imagen)
             <tr>
                 <td class="image">
-                    <img src="{{ asset($imagen->url_imagen ? "storage/{$imagen->url_imagen}" : 'storage/imagen-por-defecto.png') }}" alt="Imagen Publicitaria" width="100">
+                    <img class="img-pw" src="{{ asset($imagen->url_imagen ? "storage/{$imagen->url_imagen}" : 'storage/imagen-por-defecto.png') }}" alt="Imagen Publicitaria" width="100">
                 </td>
                 <td>{{ $imagen->id }}</td>
                 <td>{{ $imagen->fecha_inicio }}</td>
@@ -40,6 +35,4 @@
         <x-main-content.pagination :pages="[1, 2, 3, '...', 1444]" :currentPage="1" />
     </div>
 </div>
-
-
 @endsection

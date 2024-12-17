@@ -4,11 +4,7 @@
 
 @section('main-content')
 <div class="main-content__panel">
-    <x-main-content.panel-header title="Usuarios" :filters="[
-        ['label' => 'Filtro por Rol'],
-        ['label' => 'Estado'],
-        ['label' => 'Fecha de Registro']
-    ]" rowsPerPage="10" prefix="users"/>
+    <x-main-content.panel-header title="Usuarios" rowsPerPageButton :rowsPerPage="$rowsPerPage" prefix="users"/>
 
     <x-main-content.table :headers="['Id', 'Rol', 'Nombre', 'Apellido', 'Email', 'Fecha de Registro', 'Estado', 'Acciones']">
         @foreach ($usuarios as $usuario)

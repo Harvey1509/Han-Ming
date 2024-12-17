@@ -1,20 +1,28 @@
 @props([
-    'icon_left' => null, 
-    'icon_right' => null, 
-    'placeholder' => '', 
-    'status' => null,
+'icon_left' => null,
+'icon_right' => null,
+'placeholder' => '',
+'status' => null,
+'id' => null,
 ])
 
 <div {{ $attributes->merge(['class' => "search__wrapper"]) }}>
     <div class="search__box {{ $status ? 'search__box--' . $status : '' }} {{ $icon_left ? 'search__box--icon-left' : '' }} {{ $icon_right ? 'search__box--icon-right' : '' }}">
         @if ($icon_left)
-            <x-icon class="search__icon" icon_name="search" />
+        <x-icon class="search__icon" icon_name="search" />
         @endif
 
-        <input class="search" type="text" placeholder="{{ $placeholder }}">
+        <input
+            @if($id) id="{{ $id }}" @endif
+            class="search"
+            type="text"
+            placeholder="{{ $placeholder }}"
+            value="{{ request('search') }}"
+            oninput="handleSearch(event)">
+
 
         @if ($icon_right)
-            <x-icon class="search__icon" icon_name="search" />
+        <x-icon class="search__icon" icon_name="search" />
         @endif
     </div>
 </div>
@@ -35,6 +43,7 @@
         height: 40px;
         padding: 0 10px;
     }
+
     .search__box--disabled {
         --search-main-color: var(--neutral-c300);
         pointer-events: none;

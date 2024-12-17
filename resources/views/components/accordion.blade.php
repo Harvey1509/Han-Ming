@@ -61,7 +61,6 @@
 
                 const isExpanded = header.getAttribute('aria-expanded') === 'true';
 
-                // Alternar el estado del acordeón
                 header.setAttribute('aria-expanded', !isExpanded);
                 content.classList.toggle('hidden');
             });

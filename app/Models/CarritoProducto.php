@@ -21,7 +21,6 @@ class CarritoProducto extends Model
         return $this->belongsTo(Producto::class, 'id_producto');
     }
 
-    // Añadir relación inversa con el producto, si deseas acceder al carrito desde el producto.
     public function carrito_productos()
     {
         return $this->hasMany(CarritoProducto::class, 'id_producto');

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarritoProducto;
 use App\Models\Producto;
 use App\Models\Subcategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
@@ -12,11 +14,16 @@ class ProductoController extends Controller
 
     // Funciones que devuelven vistas
 
-    public function index()
+    public function index(Request $request)
     {
-        $productos = Producto::with('subcategoria')->get();
-        return view('dashboard.products.index', compact('productos'));
+        $search = $request->query('search', '');
+        $rowsPerPage = $request->query('rows', 10);
+
+        $productos = Producto::with('subcategoria')->when($search, function ($query) use ($search) {$query->where('nombre_producto', 'LIKE', "%$search%");})->paginate($rowsPerPage);
+
+        return view('dashboard.products.index', compact('productos', 'search', 'rowsPerPage'));
     }
+
 
     public function create()
     {
@@ -24,7 +31,7 @@ class ProductoController extends Controller
         return view('dashboard.products.create', compact('subcategorias'));
     }
 
-    
+
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
@@ -38,6 +45,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'id' => 'required|string|size:6|unique:productos,id', 
             'nombre_producto' => 'nullable|string|max:255',
             'subcategoria_producto' => 'required|exists:subcategorias,id',
             'precio_producto' => 'nullable|numeric',
@@ -46,24 +54,25 @@ class ProductoController extends Controller
         ]);
 
         $producto = new Producto();
-        $producto->nombre_producto = $validatedData['nombre_producto'];
+        $producto->id = $validatedData['id'];
+        $producto->nombre_producto = $validatedData['nombre_producto'] ?? '';
         $producto->id_subcategoria = $validatedData['subcategoria_producto'];
-        $producto->precio_producto = $validatedData['precio_producto'];
-        $producto->descripcion_producto = $validatedData['descripcion_producto'];
-        $producto->imagen_url_producto = '';
+        $producto->precio_producto = $validatedData['precio_producto'] ?? 0;
+        $producto->descripcion_producto = $validatedData['descripcion_producto'] ?? '';
+        $producto->imagen_url_producto = ''; 
         $producto->save();
 
-        // Guardar la imagen asociada al producto
         if ($request->hasFile('imagen_producto')) {
-            $nombreProducto = str_replace(' ', '_', $validatedData['nombre_producto']);
-            $nombreImagen = $producto->id . '_' . $nombreProducto; // Solo ID y nombre_producto
+            $nombreProducto = str_replace(' ', '_', $validatedData['nombre_producto'] ?? 'producto');
+            $nombreImagen = $validatedData['id'] . '_' . $nombreProducto;
 
-            $producto->imagen_url_producto = $request->file('imagen_producto')->storeAs(
+            $rutaImagen = $request->file('imagen_producto')->storeAs(
                 'imagenes_productos',
                 $nombreImagen . '.' . $request->file('imagen_producto')->getClientOriginalExtension(),
                 'public'
             );
 
+            $producto->imagen_url_producto = $rutaImagen;
             $producto->save();
         }
 
@@ -73,6 +82,7 @@ class ProductoController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
+            'id' => 'required|string|size:6|unique:productos,id,' . $id,
             'nombre_producto' => 'nullable|string|max:255',
             'subcategoria_producto' => 'required|exists:subcategorias,id',
             'precio_producto' => 'nullable|numeric',
@@ -81,6 +91,13 @@ class ProductoController extends Controller
         ]);
 
         $producto = Producto::findOrFail($id);
+
+        if ($producto->id !== $validatedData['id']) {
+            CarritoProducto::where('id_producto', $producto->id)->update(['id_producto' => $validatedData['id']]);
+
+            $producto->id = $validatedData['id'];
+        }
+
         $nombreProductoAnterior = $producto->nombre_producto;
         $producto->nombre_producto = $validatedData['nombre_producto'];
         $producto->id_subcategoria = $validatedData['subcategoria_producto'];
@@ -93,7 +110,7 @@ class ProductoController extends Controller
             }
 
             $nombreProducto = str_replace(' ', '_', $validatedData['nombre_producto']);
-            $nombreImagen = $producto->id . '_' . $nombreProducto; // Solo ID y nombre_producto
+            $nombreImagen = $producto->id . '_' . $nombreProducto;
 
             $producto->imagen_url_producto = $request->file('imagen_producto')->storeAs(
                 'imagenes_productos',
@@ -117,6 +134,8 @@ class ProductoController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto actualizado correctamente.');
     }
 
+
+
     public function destroy($id)
     {
         $producto = Producto::findOrFail($id);
@@ -129,5 +148,4 @@ class ProductoController extends Controller
 
         return redirect()->route('products.index')->with('success', 'Producto eliminado correctamente.');
     }
-
 }

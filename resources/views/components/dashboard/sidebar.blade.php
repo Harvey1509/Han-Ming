@@ -6,16 +6,8 @@
             ['route' => 'subcategories.index', 'icon' => 'shoppingmode', 'label' => 'Subcategorias'],
             ['route' => 'products.index', 'icon' => 'inventory_2', 'label' => 'Productos'],
             ['route' => 'ad_images.index', 'icon' => 'image', 'label' => 'Imagenes Publicitarias'],
-            ['route' => 'roles.index', 'icon' => 'manage_accounts', 'label' => 'Roles'],
-            ['route' => 'permissions.index', 'icon' => 'shield', 'label' => 'Permisos'],
-            ['route' => 'role_permissions.index', 'icon' => 'admin_panel_settings', 'label' => 'Roles y permisos'],
             ['route' => 'users.index', 'icon' => 'person', 'label' => 'Usuarios'],
-        ];
-
-        $settings = [
-            ['route' => 'test', 'icon' => 'contrast', 'label' => 'Tema'],
-            ['route' => 'test', 'icon' => 'language', 'label' => 'Idiomas'],
-            ['route' => 'test', 'icon' => 'settings', 'label' => 'Ajustes'],
+            ['route' => 'roles.index', 'icon' => 'manage_accounts', 'label' => 'Roles'],
         ];
     @endphp
 
@@ -27,18 +19,6 @@
             {{ $item['label'] }}
         </a>
     @endforeach
-
-    <div class="sidebar__separator"></div>
-
-    @foreach ($settings as $item)
-        <a href="{{ $item['route'] }}" class="sidebar__button">
-            <span class="sidebar__indicator"></span>
-            <x-icon icon_name="{{ $item['icon'] }}" />
-            {{ $item['label'] }}
-        </a>
-    @endforeach
-
-    <div class="sidebar__separator"></div>
     <form action="{{route('logout')}}" method="post" class="sidebar__logout">
         @csrf
         <button type="submit" class="sidebar__button sidebar__button--bottom">

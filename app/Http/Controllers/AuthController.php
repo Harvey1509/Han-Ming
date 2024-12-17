@@ -6,6 +6,7 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,8 @@ class AuthController extends Controller
 
     public function handleRegister(Request $request)
     {
+        Log::info('Register request received', ['request' => $request->all()]);
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:50',
             'lastname' => 'required|string|max:50',
@@ -28,24 +31,30 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        Log::info('Register request validated', ['validatedData' => $validatedData]);
+
         $usuario = Usuario::create([
             'nombre_usuario' => $validatedData['name'],
             'apellido_usuario' => $validatedData['lastname'],
             'email_usuario' => $validatedData['email'],
             'password_usuario' => Hash::make($validatedData['password']),
-            'id_rol' => 2, // Ejemplo: asignar un rol predeterminado para usuarios comunes.
+            'id_rol' => 3,
             'estado_usuario' => 'activo',
             'fecha_registro' => now(),
         ]);
 
-        // Autenticar al usuario después del registro
+        Log::info('User created', ['usuario' => $usuario]);
+
         Auth::login($usuario);
 
-        return redirect()->route('home')->with('success', 'Registro exitoso. Bienvenido!');
+        Log::info('User logged in', ['usuario' => $usuario]);
+
+        return redirect()->route('shop.home')->with('success', 'Registro exitoso. Bienvenido!');
     }
 
     public function handleLogin(Request $request)
     {
+
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
@@ -59,13 +68,13 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Credenciales incorrectas'])->onlyInput('email');
     }
 
-
-
     public function logout(Request $request)
     {
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
 
         return redirect()->route('login')->with('success', 'Sesión cerrada correctamente.');
     }

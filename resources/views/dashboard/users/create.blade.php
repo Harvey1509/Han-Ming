@@ -17,7 +17,7 @@
                 <x-input type="text" label="Apellido" name="apellido_usuario" placeholder="Ingrese el apellido del usuario" required />
                 <x-input type="email" label="Correo electrónico" name="email_usuario" placeholder="Ingrese el email" required />
                 <x-input type="password" label="Contraseña" name="password_usuario" placeholder="Ingrese la contraseña" required />
-                <x-form.select-field name="id_rol" label="Rol del Usuario" text="Elija un rol" :options="$roles" :currentOption="null" />
+                <x-select name="id_rol" label="Rol del Usuario" text="Elija un rol" :options="$roles" :currentOption="null" />
                 <x-checkbox type="round" name="estado_usuario" checked>
                     Estado (Activo por defecto)
                 </x-checkbox>

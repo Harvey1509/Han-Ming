@@ -10,8 +10,6 @@ use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ImagenPublicitariaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\RolController;
-use App\Http\Controllers\PermisoController;
-use App\Http\Controllers\RolPermisoController;
 use App\Http\Controllers\CarritoController;
 
 // Ruta principal redirige a la tienda pública
@@ -26,15 +24,16 @@ Route::prefix('shop')->group(function () {
         Route::post('/complaints', [EcommerceController::class, 'sendClaim'])->name('sendClaim');
         Route::post('/carrito', [CarritoController::class, 'index'])->name('shop.carrito');
         Route::post('/carrito/agregar', [CarritoController::class, 'agregarProducto'])->name('shop.agregarProducto');
+        Route::post('/carrito/actualizarCant', [CarritoController::class, 'actualizarCantidad'])->name('shop.actualizarCantidad');
         Route::delete('/carrito/eliminar', [CarritoController::class, 'eliminarProducto'])->name('shop.eliminarProducto');
         Route::post('/carrito/finalizar', [CarritoController::class, 'finalizarCarrito'])->name('shop.finalizarCarrito');
     });
 });
 
 Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'handleRegister'])->name('handleRegister');
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'handleLogin'])->name('handleLogin');
 });
 
@@ -106,25 +105,5 @@ Route::prefix('dashboard')
             Route::get('/{id}', [RolController::class, 'edit'])->name('roles.edit');
             Route::put('/{id}', [RolController::class, 'update'])->name('roles.update');
             Route::delete('/{id}', [RolController::class, 'destroy'])->name('roles.destroy');
-        });
-
-        // Rutas para permisos
-        Route::prefix('permissions')->group(function () {
-            Route::get('/', [PermisoController::class, 'index'])->name('permissions.index');
-            Route::get('/create', [PermisoController::class, 'create'])->name('permissions.create');
-            Route::post('/create', [PermisoController::class, 'store'])->name('permissions.store');
-            Route::get('/{id}', [PermisoController::class, 'edit'])->name('permissions.edit');
-            Route::put('/{id}', [PermisoController::class, 'update'])->name('permissions.update');
-            Route::delete('/{id}', [PermisoController::class, 'destroy'])->name('permissions.destroy');
-        });
-
-        // Rutas para permisos de roles
-        Route::prefix('role_permissions')->group(function () {
-            Route::get('/', [RolPermisoController::class, 'index'])->name('role_permissions.index');
-            Route::get('/create', [RolPermisoController::class, 'create'])->name('role_permissions.create');
-            Route::post('/create', [RolPermisoController::class, 'store'])->name('role_permissions.store');
-            Route::get('/{id}', [RolPermisoController::class, 'edit'])->name('role_permissions.edit');
-            Route::put('/{id}', [RolPermisoController::class, 'update'])->name('role_permissions.update');
-            Route::delete('/{id}', [RolPermisoController::class, 'destroy'])->name('role_permissions.destroy');
         });
     });

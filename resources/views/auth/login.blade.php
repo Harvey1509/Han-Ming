@@ -21,7 +21,7 @@
     <header class="header">
         <div class="header__top">
             <div class="header__container container" style="justify-content: center;">
-                <a href="pages/ecommerce/home.html" class="header__logo">
+                <a href="{{route('shop.home')}}" class="header__logo">
                     <img alt="Logotipo" class="logotipo logotipo--header" />
                 </a>
             </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="login__buttons">
                         <button type="submit" class="login__button">Acceder</button>
-                        <a href="register.html" class="login__register">Registrarse</a>
+                        <a href="{{route('register')}}" class="login__register">Registrarse</a>
                     </div>
                 </form>
             </div>

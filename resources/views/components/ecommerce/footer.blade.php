@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://w.app/zKQP3v">
+                        <a target="_blank" href="https://wa.me/51978668854?text=Hola,%20estoy%20interesado%20en%20obtener%20más%20información.">
                             <img src="../../img/Whatsapp.svg" alt="Whatsapp" />
                         </a>
                     </li>

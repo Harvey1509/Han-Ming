@@ -16,28 +16,35 @@ class EcommerceController extends Controller
 {
     public function home()
     {
-        $imagenes_slider = ImagenPublicitaria::where('tipo', 'paginaInicio')
+        $imagenes_slider = $this->obtenerImagenes('pagina_de_inicio', '/img/promocion.jpeg');
+        $ofertas_temporada = $this->obtenerImagenes('ofertas_de_temporada', '/img/promocion.jpeg');
+        $promociones = $this->obtenerImagenes('promociones', '/img/promocion.jpeg');
+
+        return view('ecommerce.home', compact('imagenes_slider', 'ofertas_temporada', 'promociones'));
+    }
+
+    private function obtenerImagenes($tipo, $imagen_default)
+    {
+        $imagenes = ImagenPublicitaria::where('tipo', $tipo)
             ->where('estado', 'activo')
             ->orderBy('orden', 'asc')
             ->get(['url_imagen']);
-        $imagenes_slider->each(function ($imagen) {
+
+        if ($imagenes->isEmpty()) {
+            return collect([['url_imagen' => $imagen_default]]);
+        }
+
+        return $imagenes->map(function ($imagen) {
             $imagen->url_imagen = url('storage/' . $imagen->url_imagen);
+            return $imagen;
         });
-        return view('ecommerce.home', compact('imagenes_slider'));
     }
 
     public function products()
     {
-        $categorias = Categoria::whereHas('subcategorias.productos') 
-            ->with(['subcategorias' => function ($query) {
-                $query->whereHas('productos'); 
-            }])
-            ->get();
+        $categorias = Categoria::whereHas('subcategorias.productos')->with(['subcategorias' => function ($query) {$query->whereHas('productos');}])->get();
 
-        $imagenes_slider = ImagenPublicitaria::where('tipo', 'paginaProductos')->get(['url_imagen']);
-        $imagenes_slider->each(function ($imagen) {
-            $imagen->url_imagen = url('storage/' . $imagen->url_imagen);
-        });
+        $imagenes_slider = $this->obtenerImagenes('pagina_de_productos', '/img/promocion.jpeg');
 
         $productos = Producto::paginate(15);
 
@@ -51,7 +58,6 @@ class EcommerceController extends Controller
 
     public function sendClaim(Request $request)
     {
-        // Validar los datos del formulario
         $validated = $request->validate([
             // Datos del proveedor
             'razon_social' => 'required|string|max:255',
@@ -68,7 +74,7 @@ class EcommerceController extends Controller
             'distrito' => 'required|string|max:255',
             'telefono' => 'nullable|string|max:255',
             'email' => 'required|email',
-            
+
             // Solo en caso de ser menor de edad
             'nombre_representante' => 'nullable|string|max:255',
             'dni_representante' => 'nullable|string|max:8',
@@ -85,14 +91,11 @@ class EcommerceController extends Controller
             'pedido_consumidor' => 'required|string|max:255',
         ]);
 
-        // Agregar el correo del usuario logueado
         $complaintData = $validated;
-        $complaintData['email'] = Auth::user()->email_usuario; 
+        $complaintData['email'] = Auth::user()->email_usuario;
 
-        // Enviar el correo
-        Mail::to('ovjeanbeckan@gmail.com')->send(new SendClaimMail($complaintData));
+        Mail::to('ovjeanb@gmail.com')->send(new SendClaimMail($complaintData));
 
-        // Redirigir con mensaje de éxito
         return redirect()->back()->with('success', 'Reclamación enviada correctamente.');
     }
 
@@ -100,7 +103,6 @@ class EcommerceController extends Controller
     {
         $order = Orden::with(['usuario', 'carrito.productos.producto'])->findOrFail($orderId);
 
-        // Enviar correo
         Mail::to($order->usuario->email_usuario)->send(new OrderReceivedMail($order));
 
         return response()->json(['message' => 'Orden enviado exitosamente.']);
