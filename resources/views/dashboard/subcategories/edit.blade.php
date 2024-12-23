@@ -15,8 +15,8 @@
             id="editForm">
             @method('PUT')
             @csrf
-            <x-input-field type="text" label="Id" value="{{ $subcategoria->id }}" status="disabled" />
-            <x-input-field name="nombre_subcategoria" type="text" label="Nombre actual"
+            <x-input type="text" label="Id" value="{{ $subcategoria->id }}" status="disabled" />
+            <x-input name="nombre_subcategoria" type="text" label="Nombre actual"
                 value="{{ $subcategoria->nombre_subcategoria }}" required="required" />
             <x-select label="Subcategoría perteneciente" name="categoria_perteneciente"
                 text="Elija una subcategoría" :options="$categorias" :currentOption="$categoria_asociada->id" />

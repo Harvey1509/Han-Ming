@@ -12,14 +12,12 @@
             <td>{{ $categoria->id }}</td>
             <td>{{ $categoria->nombre_categoria }}</td>
             <td class="buttons">
-                <a href="{{ route('categories.edit', ['id' => $categoria->id]) }}"
-                    class="buttons--edit button">Editar</a>
+                <a href="{{ route('categories.edit', ['id' => $categoria->id]) }}" class="buttons--edit button">Editar</a>
                 <form action="{{ route('categories.destroy', ['id' => $categoria->id]) }}" method="POST"
                     style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="buttons--delete"
-                        onclick="return confirm('¿Estás seguro de eliminar esta categoria?');">Eliminar</button>
+                    <button type="submit" class="buttons--delete" onclick="return confirm('¿Estás seguro de eliminar esta categoria?');">Eliminar</button>
                 </form>
             </td>
         </tr>

@@ -40,8 +40,8 @@
                     @csrf
                     <h2 class="login__title">Bienvenido, por favor inicie sesión con sus datos.</h2>
                     <div class="login__input-box">
-                        <x-input id="email" type="email" name="email" placeholder="Correo eléctronico" required />
-                        <x-input id="password" type="password" name="password" placeholder="Contraseña" required />
+                        <x-input id="email" type="email" name="email" placeholder="Correo eléctronico" />
+                        <x-input id="password" type="password" name="password" placeholder="Contraseña" />
                     </div>
                     <div class="login__utils">
                     <x-toggle label="Recordar mis datos"/>

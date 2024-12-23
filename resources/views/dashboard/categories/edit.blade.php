@@ -16,7 +16,7 @@
             @method('PUT')
             @csrf
             <x-input type="text" label="Id" value="{{ $categoria->id }}" status="disabled" />
-            <x-input type="text" label="Nombre" name="nombre_categoria" value="{{ $categoria->nombre_categoria }}" required />
+            <x-input type="text" label="Nombre" name="nombre_categoria" value="{{ $categoria->nombre_categoria }}" />
         </form>
         <div class="form-content__buttons">
             <button class="form-content__button form-content__button--submit" type="submit"

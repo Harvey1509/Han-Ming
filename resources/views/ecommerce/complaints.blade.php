@@ -65,7 +65,22 @@
     </section>
 
     <div class="form__button-wrapper">
-        <button class="form__button primary-button" type="submit" id="sendButton">Enviar</button>
+        <button class="form__button primary-button" disabled type="submit" id="sendButton">Enviar</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const terminosCheckbox = document.getElementById('terminos');
+            const privacidadCheckbox = document.getElementById('privacidad');
+            const sendButton = document.getElementById('sendButton');
+
+            function toggleSendButton() {
+                sendButton.disabled = !(terminosCheckbox.checked && privacidadCheckbox.checked);
+            }
+
+            terminosCheckbox.addEventListener('change', toggleSendButton);
+            privacidadCheckbox.addEventListener('change', toggleSendButton);
+        });
+    </script>
 </form>
 @endsection

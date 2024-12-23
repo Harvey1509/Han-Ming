@@ -17,7 +17,6 @@
     <div class="textarea__box">
         <textarea 
             @if($name) name="{{ $name }}" @endif
-            @if($required) required @endif
             class="textarea" 
             @if($id) id="{{ $id }}" @endif 
             placeholder="{{ $placeholder }}" 

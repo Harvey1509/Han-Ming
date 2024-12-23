@@ -1,39 +1,51 @@
 @props([
-'status' => 'neutral',
-'label' => null,
-'placeholder' => '',
-'r_text' => null,
-'type' => 'text',
-'id' => null,
-'name' => null,
-'required' => null,
-'value' => null
+    'status' => 'neutral',
+    'label' => null,
+    'placeholder' => '',
+    'type' => 'text',
+    'id' => null,
+    'name' => null,
+    'required' => false,
+    'value' => null,
 ])
 
-<div {{ $attributes->merge(['class' => "input__wrapper input__status--$status"]) }}>
+@php
+    $hasError = $errors->has($name);
+    $status = $hasError ? 'error' : ($status === 'success' ? 'success' : ($status === 'disabled' ? 'disabled' : 'neutral'));
+
+    $containerClass = "input__wrapper input__status--$status";
+    $inputClass = "input";
+@endphp
+
+<div {{ $attributes->merge(['class' => $containerClass]) }}>
     @if ($label)
         <label class="input__label" @if($id) for="{{ $id }}" @endif>{{ $label }}</label>
     @endif
 
     <div class="input__box">
-        <input @if($value) value="{{$value}}" @endif @if($required) required @endif class="input" type="{{ $type }}" @if($id) id="{{$id}}" @endif placeholder="{{ $placeholder }}" @if($name) name="{{ $name }}" @endif>
-        @switch($status)
-            @case('success')
-                <x-icon class="input__icon" icon_name="check_circle" />
-            @break
-            @case('error')
-                <x-icon class="input__icon" icon_name="cancel" />
-            @break
-        @endswitch
+        <input 
+            value="{{ $value }}"
+            class="{{ $inputClass }}" 
+            type="{{ $type }}" 
+            @if($id) id="{{ $id }}" @endif 
+            placeholder="{{ $placeholder }}" 
+            @if($name) name="{{ $name }}" @endif
+        >
+
+        @if($status === 'success')
+            <x-icon class="input__icon" icon_name="check_circle" />
+        @elseif($status === 'error')
+            <x-icon class="input__icon" icon_name="cancel" />
+        @endif
     </div>
 
-    @if ($r_text)
-    <small class="input__reinforcement-text">
-        {{ $r_text }}
-    </small>
-    @endif
+    {{-- Mensaje de error --}}
+    @error($name)
+        <small class="input__reinforcement-text">
+            {{ $message }}
+        </small>
+    @enderror
 </div>
-
 
 <style>
     .input__wrapper {
@@ -45,11 +57,11 @@
 
     /* Estado por default */
     .input__status--neutral {
-        --input-main-color: var(--neutral-c400);
+        --input-main-color: var(--neutral-c600);
     }
 
     .input__status--neutral:has(.input:focus) {
-        --input-main-color: var(--neutral-c600);
+        --input-main-color: var(--neutral-c800);
     }
 
     /* Variantes de estado */
@@ -72,7 +84,6 @@
     .input__status--disabled {
         --input-main-color: var(--neutral-c300);
         pointer-events: none;
-        background-color: var(--neutral-c50);
     }
 
     /* Estilos comunes con las variables seteadas */
